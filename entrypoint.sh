@@ -10,27 +10,23 @@ log() {
 }
 
 filename=$1
+user_name=$2
+user_email=$3
 
-log "File Name:" "$filename"
-
-if test -f "$filename"; then
-    content=$(cat "$filename")
-else
-    error "Version file not found! Looked for:" "$filename"
-    exit 1;
-fi
-
-log "File Content:" "$content"
+log "File name:" "$filename"
+log "File content:" "$content"
 
 git fetch --tags --force
 latestVersionTag=$(git describe --tags "$(git rev-list --tags --max-count=1)")
-
 log "Latest version tag:" "$latestVersionTag"
 
+log "Write version tag to file"
 echo "$latestVersionTag" > "$filename"
 
+log "Add user.name and user.email to config"
+git config user.name "$user_name"
+git config user.email "$user_email"
+  
 log "Add version file and commit"
-
 git add version
-
 git commit -m "Update version file"
