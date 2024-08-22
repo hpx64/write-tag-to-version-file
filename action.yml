@@ -1,5 +1,5 @@
-name: 'Write Version to File'
-author: 'Brett Dorrans'
+name: 'Write tag to version file'
+author: 'HPx64 inspired by Brett Dorrans'
 description: 'A GitHub Action that fetches the latest release tag within a repo and writes this to a file'
 inputs:
   filename:
