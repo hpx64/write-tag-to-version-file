@@ -5,11 +5,19 @@ inputs:
   filename:
     description: 'The filename to write the version tag to'
     required: true
+  commit_user_name:
+    description: Name used for the commit user
+    required: true
+  commit_user_email:
+    description: Email address used for the commit user
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.filename }}
+    - ${{ inputs.commit_user_name }}
+    - ${{ inputs.commit_user_email }}
 branding:
   icon: 'hash'
   color: 'orange'
