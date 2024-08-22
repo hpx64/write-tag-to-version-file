@@ -20,7 +20,7 @@ else
     exit 1;
 fi
 
-log "File Content:" "\n$content"
+log "File Content:" "$content"
 
 git fetch --tags --force
 latestVersionTag=$(git describe --tags "$(git rev-list --tags --max-count=1)")
@@ -29,4 +29,8 @@ log "Latest version tag:" "$latestVersionTag"
 
 echo "$latestVersionTag" > "$filename"
 
-log "Updated file content:" "\n$latestVersionTag"
+log "Add version file and commit"
+
+git add version
+
+git commit -m "Update version file"
