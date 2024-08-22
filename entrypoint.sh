@@ -13,14 +13,6 @@ filename=$1
 
 log "File Name:" "$filename"
 
-if [ -z "$2" ]; then
-    placeholder="\${VERSION}"
-else
-    placeholder=$2
-fi
-
-log "Placeholder:" "$placeholder"
-
 if test -f "$filename"; then
     content=$(cat "$filename")
 else
@@ -33,9 +25,8 @@ log "File Content:" "\n$content"
 git fetch --tags --force
 latestVersionTag=$(git describe --tags "$(git rev-list --tags --max-count=1)")
 
-log "Replacing placeholder with:" "$latestVersionTag"
+log "Latest version tag:" "$latestVersionTag"
 
-updatedContent=$(< "$filename" sed "s/$placeholder/$latestVersionTag/g")
-echo "$updatedContent" > "$filename"
+echo "$latestVersionTag" > "$filename"
 
-log "Updated File Content:" "\n$updatedContent"
+log "Updated file content:" "\n$latestVersionTag"
