@@ -30,3 +30,4 @@ git config user.email "$user_email"
 log "Add version file and commit"
 git add version
 git commit -m "Update version file"
+git push
